@@ -16,5 +16,6 @@ http://:9082 {
                 copy_response *
                 copy_response_headers *
             }
+        }
     }
 }

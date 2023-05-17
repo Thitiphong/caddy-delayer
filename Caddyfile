@@ -1,0 +1,20 @@
+{
+    auto_https off
+    order delayer before copy_response
+}
+
+http://:9082 {
+    handle_path /get {
+        reverse_proxy https://httpbin.org {
+            header_up Host {upstream_hostport}
+            transport http {
+                dial_timeout 2s
+                tls_insecure_skip_verify
+            }
+            handle_response {
+                delayer 15s
+                copy_response *
+                copy_response_headers *
+            }
+    }
+}

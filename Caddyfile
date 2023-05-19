@@ -1,10 +1,11 @@
 {
     auto_https off
+    debug
     order delayer before copy_response
 }
 
-http://:9082 {
-    handle_path /get {
+http://:8083 {
+    handle /get {
         reverse_proxy https://httpbin.org {
             header_up Host {upstream_hostport}
             transport http {
